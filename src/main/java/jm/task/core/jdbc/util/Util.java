@@ -5,7 +5,7 @@ import java.sql.*;
 public class Util {
     private static final String USER_NAME = "root";
     private static final String USER_PASSWORD = "root";
-    private static final String URL = "jdbc:mysql://localhost:3306/mysql";
+    private static final String URL = "jdbc:mysql://localhost:3306/user";
 
     public static Connection getConnection() {
         try {
@@ -18,7 +18,7 @@ public class Util {
 
     public Statement getStatement(Connection connection) {
         try {
-            return  connection.createStatement();
+            return connection.createStatement();
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
             throw new RuntimeException();

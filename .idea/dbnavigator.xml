@@ -26,15 +26,15 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="2e442675-3b37-4577-8f0d-9916b6b5d8b6">
-        <schema name="mysql" object-types="constraint, view, function, procedure, dataset trigger, column, table, index" />
-        <schema name="performance_schema" object-types="view, function, procedure, table" />
-        <schema name="sakila" object-types="constraint, view, function, procedure, dataset trigger, column, table, index" />
+        <schema name="mysql" object-types="table, view" />
+        <schema name="sakila" object-types="table, view" />
+        <schema name="user" object-types="constraint, function, procedure, table, dataset trigger, column, index, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="2e442675-3b37-4577-8f0d-9916b6b5d8b6">
-      <console name="Connection" type="STANDARD" schema="mysql" session="Main" />
+      <console name="Connection" type="STANDARD" schema="user" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -44,6 +44,8 @@
     <connection id="2e442675-3b37-4577-8f0d-9916b6b5d8b6" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="2e442675-3b37-4577-8f0d-9916b6b5d8b6" dataset="user.user" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2e442675-3b37-4577-8f0d-9916b6b5d8b6" dataset="mysql.user" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="2e442675-3b37-4577-8f0d-9916b6b5d8b6" dataset="mysql.func" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="2e442675-3b37-4577-8f0d-9916b6b5d8b6" dataset="sakila.address" active-filter-id="EMPTY_FILTER" />
   </component>
@@ -86,7 +88,7 @@
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="3306" />
-          <database value="mysql" />
+          <database value="user" />
           <type value="USER_PASSWORD" />
           <user value="root" />
           <deprecated-pwd value="cm9vdA==" />
