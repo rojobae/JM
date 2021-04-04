@@ -15,7 +15,7 @@ public class UserDaoJDBCImpl implements UserDao {
             "name VARCHAR(255) NOT NULL," +
             "lastName VARCHAR(255) NOT NULL," +
             "age TINYINT UNSIGNED);";
-    private static final String SQL_DROP = "DROP TABLE user;";
+    private static final String SQL_DROP = "DROP TABLE IF EXISTS user;";
     private static final String SQL_DELETE_ALL = "DELETE FROM user;";
     private static final String SQL_SELECT_ALL = "SELECT * FROM user;";
 
