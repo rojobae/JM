@@ -7,10 +7,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
+
 
     @Override
     public void createUsersTable() {
@@ -18,19 +18,19 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try {
             Transaction transaction = session.beginTransaction();
-            String sql = "CREATE TABLE IF NOT EXISTS user (" +
+            Query query = session.createSQLQuery("CREATE TABLE IF NOT EXISTS user (" +
                     "id BIGINT AUTO_INCREMENT PRIMARY KEY," +
                     "name VARCHAR(255) NOT NULL," +
                     "lastName VARCHAR(255) NOT NULL," +
-                    "age TINYINT UNSIGNED);";
-            Query query = session.createSQLQuery(sql).addEntity(User.class);
+                    "age TINYINT UNSIGNED);").addEntity(User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException hibernateException) {
             hibernateException.getStackTrace();
-           throw hibernateException;
+            throw hibernateException;
         } finally {
             session.close();
+            Util.getSessionFactory().close();
         }
     }
 
@@ -40,8 +40,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try {
             Transaction transaction = session.beginTransaction();
-            String sql = "DROP TABLE IF EXISTS user;";
-            Query query = session.createSQLQuery(sql).addEntity(User.class);
+            Query query = session.createSQLQuery("DROP TABLE IF EXISTS user;").addEntity(User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException hibernateException) {
@@ -49,6 +48,7 @@ public class UserDaoHibernateImpl implements UserDao {
             throw hibernateException;
         } finally {
             session.close();
+            Util.getSessionFactory().close();
         }
     }
 
@@ -58,9 +58,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try {
             Transaction transaction = session.beginTransaction();
-            String sql = String.format(
-                    "INSERT INTO user (name, lastName, age) VALUES (\"%s\", \"%s\", %d);", name, lastName, age);
-            Query query = session.createSQLQuery(sql).addEntity(User.class);
+            Query query = session.createSQLQuery(String.format(
+                    "INSERT INTO user (name, lastName, age) VALUES (\"%s\", \"%s\", %d);",
+                    name, lastName, age)).addEntity(User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException hibernateException) {
@@ -68,6 +68,7 @@ public class UserDaoHibernateImpl implements UserDao {
             throw hibernateException;
         } finally {
             session.close();
+            Util.getSessionFactory().close();
         }
     }
 
@@ -77,8 +78,8 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try {
             Transaction transaction = session.beginTransaction();
-            String sql = String.format("DELETE FROM user WHERE id = %d;", id);
-            Query query = session.createSQLQuery(sql).addEntity(User.class);
+            Query query = session.createSQLQuery(String.format(
+                    "DELETE FROM user WHERE id = %d;", id)).addEntity(User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException hibernateException) {
@@ -86,6 +87,7 @@ public class UserDaoHibernateImpl implements UserDao {
             throw hibernateException;
         } finally {
             session.close();
+            Util.getSessionFactory().close();
         }
     }
 
@@ -95,9 +97,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try {
             Transaction transaction = session.beginTransaction();
-            String sql = "SELECT * FROM user;";
-            Query query = session.createSQLQuery(sql).addEntity(User.class);
-            ArrayList<User> users = new ArrayList<User>(query.list());
+            List<User> users =  session.createSQLQuery("SELECT * FROM user;").addEntity(User.class).list();
             transaction.commit();
             return users;
         } catch (HibernateException hibernateException) {
@@ -105,6 +105,7 @@ public class UserDaoHibernateImpl implements UserDao {
             throw hibernateException;
         } finally {
             session.close();
+            Util.getSessionFactory().close();
         }
     }
 
@@ -114,8 +115,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try {
             Transaction transaction = session.beginTransaction();
-            String sql = "DELETE FROM user;";
-            Query query = session.createSQLQuery(sql).addEntity(User.class);
+            Query query = session.createSQLQuery("DELETE FROM user;").addEntity(User.class);
             query.executeUpdate();
             transaction.commit();
         } catch (HibernateException hibernateException) {
@@ -123,6 +123,7 @@ public class UserDaoHibernateImpl implements UserDao {
             throw hibernateException;
         } finally {
             session.close();
+            Util.getSessionFactory().close();
         }
     }
 }

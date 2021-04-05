@@ -11,9 +11,11 @@ public class Main {
         userService.saveUser("Лёша", "Семёнов", (byte) 19);
         userService.saveUser("Маша", "Симонова", (byte) 8);
         userService.saveUser("Коля", "Романов", (byte) 55);
+
         for (User user: userService.getAllUsers()) {
             System.out.println(user.toString());
         }
+
         userService.cleanUsersTable();
         userService.dropUsersTable();
     }
