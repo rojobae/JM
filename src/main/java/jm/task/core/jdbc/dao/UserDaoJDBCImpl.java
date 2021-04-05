@@ -77,6 +77,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
+    @Override
     public void cleanUsersTable() {
         try (Statement statement = Util.getStatement(Util.getConnection())) {
             statement.executeUpdate("DELETE FROM user;");
